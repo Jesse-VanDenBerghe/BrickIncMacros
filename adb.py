@@ -1,6 +1,7 @@
 import subprocess
 import random
 from time import sleep
+from PIL import Image
 
 def list_adb_devices():
     try:
@@ -37,3 +38,20 @@ def holdAt(x, y, duration_ms):
         subprocess.run(['adb', 'shell', 'input', 'swipe', str(x), str(y), str(x), str(y), str(duration_ms)], check=True)
     except Exception as error:
         print(f'Error performing hold at ({x}, {y}) for {duration_ms} ms: {error}')
+
+def createScreenShotBetweenXandY(x1, y1, x2, y2, output_file='screenshot.png'):
+    try:
+        subprocess.run(['adb', 'shell', 'screencap', '-p', '/sdcard/screenshot.png'], check=True)
+        subprocess.run(['adb', 'pull', '/sdcard/screenshot.png', output_file], check=True)
+        img = Image.open(output_file)
+        cropped_img = img.crop((x1, y1, x2, y2))
+        cropped_img.save(output_file)
+    except Exception as error:
+        print(f'Error creating screenshot between ({x1}, {y1}) and ({x2}, {y2}): {error}')
+
+def createFullScreenShot(output_file='screenshot.png'):
+    try:
+        subprocess.run(['adb', 'shell', 'screencap', '-p', '/sdcard/screenshot.png'], check=True)
+        subprocess.run(['adb', 'pull', '/sdcard/screenshot.png', output_file], check=True)
+    except Exception as error:
+        print(f'Error creating full screenshot: {error}')

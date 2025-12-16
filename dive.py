@@ -2,17 +2,21 @@ from adb import *
 from ochestrator import *
 from upgrades import *
 from brick import *
+from rank import *
 
 def dive():
     while True:
 
-        autoFire()
-        ensureUpgradesClosed()
-        upgradeWeapons()
-        upgradeResearch()
-        upgradeFields()
+        for _ in range(3):
+            autoFire()
+            ensureUpgradesClosed()
+            upgradeWeapons()
+            upgradeResearch()
+            upgradeFields()
 
-        upgradeAllUpgrades()
+            upgradeAllUpgrades()
+
+        upgradeRank()
 
         wait()
 

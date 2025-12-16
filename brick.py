@@ -10,6 +10,11 @@ WEAPON_EQUIP_ALL = 1150, 1820
 
 TO_RESEARCH_MENU = 1000, 2570
 RESEARCH_UPGRADE_ALL = 670, 1570
+RESEARCH_UP = 90, 2570
+RESEARCH_DOWN = 180, 2570
+RESEARCH_1 = 1050, 2160
+RESEARCH_2 = 1050, 1900
+RESEARCH_3 = 1050, 1700
 
 TO_FIELDS_MENU = 1180, 2570
 FIELDS_UNLOCK_ASSIST = 824, 1570
@@ -33,6 +38,18 @@ def upgradeWeapons():
 def upgradeResearch():
     tapAt(*TO_RESEARCH_MENU)
     wait(WAIT_LONG)
+    tapAt(*RESEARCH_UPGRADE_ALL)
+    wait()
+    tapAt(*RESEARCH_UP)
+    wait()
+    tapAt(*RESEARCH_DOWN)
+    wait()
+    tapAt(*RESEARCH_1)
+    wait(WAIT_SHORT)
+    tapAt(*RESEARCH_2)
+    wait()
+    tapAt(*RESEARCH_3)
+    wait()
     tapAt(*RESEARCH_UPGRADE_ALL)
     wait()
 
