@@ -1,0 +1,47 @@
+from adb import *
+from ochestrator import *
+
+AUTOFIRE = 625, 2750
+
+TO_WEAPON_MENU = 855, 2570
+WEAPON_BUY_ALL = 790, 1820
+WEAPON_UPGRADE_ALL = 1010, 1820
+WEAPON_EQUIP_ALL = 1150, 1820
+
+TO_RESEARCH_MENU = 1000, 2570
+RESEARCH_UPGRADE_ALL = 670, 1570
+
+TO_FIELDS_MENU = 1180, 2570
+FIELDS_UNLOCK_ASSIST = 824, 1570
+FIELD_TO_LAST_SELECTABLE = 200, 2580
+FIELD_SELECT_LAST_SELECTABLE = 700, 1850
+
+def autoFire():
+    rapidTap(*AUTOFIRE, 10, 1)
+    wait()
+
+def upgradeWeapons():
+    tapAt(*TO_WEAPON_MENU)
+    wait(WAIT_LONG)
+    tapAt(*WEAPON_BUY_ALL)
+    wait()
+    tapAt(*WEAPON_UPGRADE_ALL)
+    wait()
+    tapAt(*WEAPON_EQUIP_ALL)
+    wait()
+
+def upgradeResearch():
+    tapAt(*TO_RESEARCH_MENU)
+    wait(WAIT_LONG)
+    tapAt(*RESEARCH_UPGRADE_ALL)
+    wait()
+
+def upgradeFields():
+    tapAt(*TO_FIELDS_MENU)
+    wait(WAIT_LONG)
+    tapAt(*FIELDS_UNLOCK_ASSIST)
+    wait()
+    tapAt(*FIELD_TO_LAST_SELECTABLE)
+    wait()
+    tapAt(*FIELD_SELECT_LAST_SELECTABLE)
+    wait()
