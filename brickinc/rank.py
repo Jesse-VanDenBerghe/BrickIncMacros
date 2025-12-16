@@ -1,6 +1,6 @@
-from adb import *
-from image import *
-from ochestrator import *
+from utils.adb import *
+from utils.image import *
+from utils.ochestrator import *
 from enum import Enum
 
 TO_RANK_MENU = 640, 420

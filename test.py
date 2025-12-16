@@ -1,5 +1,5 @@
-from adb import *
-from brick import *
-from upgrades import *
+from utils.adb import *
+from brickinc.brick import *
+from brickinc.upgrades import *
 
 upgradeScience()

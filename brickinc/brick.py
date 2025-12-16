@@ -1,5 +1,5 @@
-from adb import *
-from ochestrator import *
+from utils.adb import *
+from utils.ochestrator import *
 
 AUTOFIRE = 625, 2750
 

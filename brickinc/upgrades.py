@@ -1,5 +1,5 @@
-from adb import *
-from ochestrator import *
+from utils.adb import *
+from utils.ochestrator import *
 
 TOGGLE_UPGRADES = 360, 2770
 

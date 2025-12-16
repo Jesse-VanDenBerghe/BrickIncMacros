@@ -1,8 +1,12 @@
-from adb import *
-from ochestrator import *
-from upgrades import *
-from brick import *
-from rank import *
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from utils.adb import *
+from utils.ochestrator import *
+from brickinc.upgrades import *
+from brickinc.brick import *
+from brickinc.rank import *
 
 def dive():
     rankUp = RankUp.SMALL_RANK_UP
