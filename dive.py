@@ -5,20 +5,24 @@ from brick import *
 from rank import *
 
 def dive():
-    while True:
+    rankUp = RankUp.SMALL_RANK_UP
 
-        for _ in range(3):
+    while True:
+        
+        if rankUp != RankUp.NO_RANK_UP:
+            upgradeFields()
             autoFire()
-            ensureUpgradesClosed()
+
+
+        loopAmount = 5 if rankUp == RankUp.BIG_RANK_UP else 3
+
+        for _ in range(loopAmount):
             upgradeWeapons()
             upgradeResearch()
             upgradeFields()
-
             upgradeAllUpgrades()
 
-        upgradeRank()
-
-        wait()
+        rankUp = upgradeRank()
 
 
 dive()

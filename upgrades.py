@@ -34,9 +34,11 @@ CLOSE_SOUL_MENU = 100, 2580
 TO_SOUL_ALTAR = 400, 2570
 UPGRADE_SOUL_ALTAR = 680, 1100
 TO_SOUL_UPGRADES = 730, 2570
-UPGRADE_SOUL_UPGRADES = 790, 920
+UPGRADE_SOUL_UPGRADES_25 = 790, 920
+UPGRADE_SOUL_UPGRADES_100 = 1120, 920
 TO_SOUL_ENHANCEMENTS = 1100, 2570
-UPGRADE_SOUL_ENHANCEMENTS = 790, 920
+UPGRADE_SOUL_ENHANCEMENTS_25 = 790, 920
+UPGRADE_SOUL_ENHANCEMENTS_100 = 1120, 920
 
 atSoulMenu = False
 def ensureSoulMenuOpen():
@@ -57,26 +59,30 @@ def closeSoulMenu():
 def upgradeSouls():
     ensureSoulMenuOpen()
 
-    wait(WAIT_LONG)
     tapAt(*TO_SOUL_ALTAR)
-    wait()
+    wait(WAIT_MEDIUM)
     tapAt(*UPGRADE_SOUL_ALTAR)
-    wait(WAIT_LONG)
+    wait(WAIT_SHORT)
 
     tapAt(*TO_SOUL_UPGRADES)
-    wait()
-    rapidTap(*UPGRADE_SOUL_UPGRADES, 2, 3)
-    wait(WAIT_LONG)
+    wait(WAIT_MEDIUM)
+    rapidTap(*UPGRADE_SOUL_UPGRADES_25, 2, 3)
+    wait(WAIT_SHORT)
+    tapAt(*UPGRADE_SOUL_UPGRADES_100)
+    wait(WAIT_SHORT)
 
     tapAt(*TO_SOUL_ENHANCEMENTS)
-    wait()
-    rapidTap(*UPGRADE_SOUL_ENHANCEMENTS, 2, 3)
-    wait(WAIT_LONG)
+    wait(WAIT_MEDIUM)
+    rapidTap(*UPGRADE_SOUL_ENHANCEMENTS_25, 2, 3)
+    wait(WAIT_SHORT)
+    tapAt(*UPGRADE_SOUL_ENHANCEMENTS_100)
+    wait(WAIT_SHORT)
 
     closeSoulMenu()
 
 TO_SCIENCE_MENU = 210, 1320
-UPGRADE_SCIENCE = 800, 1300
+UPGRADE_SCIENCE_25 = 800, 1300
+UPGRADE_SCIENCE_100 = 1110, 1300
 UPGRADE_SCIENCE_ALL = 650, 1000
 CLOSE_SCIENCE_MENU = 100, 2580
 
@@ -98,13 +104,17 @@ def closeScienceMenu():
 def upgradeScience():
     ensureScienceMenuOpen()
 
-    rapidTap(*UPGRADE_SCIENCE, 3, 3)
+    rapidTap(*UPGRADE_SCIENCE_25, 3, 3)
+    wait(WAIT_SHORT)
+    tapAt(*UPGRADE_SCIENCE_100)
+    wait(WAIT_SHORT)
     tapAt(*UPGRADE_SCIENCE_ALL)
 
     closeScienceMenu()
 
 TO_DIMENSION_MENU = 650, 1300
-UPGRADE_DIMENSIONS = 800, 920
+UPGRADE_DIMENSIONS_25 = 800, 920
+UPGRADE_DIMENSIONS_100 = 1120, 920
 CLOSE_DIMENSION_MENU = 100, 2580
 
 atDimensionMenu = False
@@ -125,6 +135,9 @@ def closeDimensionMenu():
 def upgradeDimensions():
     ensureDimensionMenuOpen()
 
-    rapidTap(*UPGRADE_DIMENSIONS, 3, 3)
+    rapidTap(*UPGRADE_DIMENSIONS_25, 3, 3)
+    wait(WAIT_SHORT)
+    tapAt(*UPGRADE_DIMENSIONS_100)
+    wait(WAIT_SHORT)
 
     closeDimensionMenu()

@@ -33,6 +33,21 @@ def tapAt(x, y):
     except Exception as error:
         print(f'Error performing tap at ({x}, {y}): {error}')
 
+def swipeFromTo(x1, y1, x2, y2, duration_ms):
+    try:
+        subprocess.run(['adb', 'shell', 'input', 'swipe', str(x1), str(y1), str(x2), str(y2), str(duration_ms)], check=True)
+    except Exception as error:
+        print(f'Error performing swipe from ({x1}, {y1}) to ({x2}, {y2}): {error}')
+
+def swipeUpAndHold(x, y, distance, swipe_duration_ms, hold_duration_ms):
+    try:
+        end_y = y - distance
+        subprocess.run(['adb', 'shell', 'input', 'swipe', str(x), str(y), str(x), str(end_y), str(swipe_duration_ms)], check=True)
+        sleep(0.05)
+        subprocess.run(['adb', 'shell', 'input', 'swipe', str(x), str(end_y), str(x), str(end_y), str(hold_duration_ms)], check=True)
+    except Exception as error:
+        print(f'Error performing swipe and hold at ({x}, {y}) for distance {distance}: {error}')
+
 def holdAt(x, y, duration_ms):
     try:
         subprocess.run(['adb', 'shell', 'input', 'swipe', str(x), str(y), str(x), str(y), str(duration_ms)], check=True)

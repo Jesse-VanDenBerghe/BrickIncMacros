@@ -29,3 +29,7 @@ def getColorAtPixel(image_path, x, y):
 
 def areColorsMatching(color1, color2, tolerance=10):
     return all(abs(c1 - c2) <= tolerance for c1, c2 in zip(color1, color2))
+
+def pixelMatchesColor(image_path, x, y, target_color, tolerance=10) -> bool:
+    pixel_color = getColorAtPixel(image_path, x, y)
+    return areColorsMatching(pixel_color, target_color, tolerance)

@@ -1,20 +1,41 @@
 from adb import *
 from image import *
 from ochestrator import *
+from enum import Enum
 
 TO_RANK_MENU = 640, 420
 NEXT_RANK_UP_COLOR = (132,255,0)
 PREV_RANK_UP = 300, 1000
+PREV_RANK_UP_INDICATOR = 344, 1037
+CURRENT_RANK_UP_INDICATOR = 710, 1058
 NEXT_RANK_UP = 1000, 1000
 NEXT_RANK_UP_INDICATOR = 1027, 1037
 UPGRADE_RANK = 650, 1850
 
-def checkForRankUp():
+class RankState(Enum):
+    PREV_RANK_UP = 1
+    CURRENT_RANK_UP = 2
+    NEXT_RANK_UP = 3
+
+class RankUp(Enum):
+    BIG_RANK_UP = 1
+    SMALL_RANK_UP = 2
+    NO_RANK_UP = 3
+
+def checkForRankUp() -> RankState | None:
+    rankUp = None
     screenshotFile = 'images/artifacts/next_rank_up.png'
     createFullScreenShot(screenshotFile)
-    colorAtPixel = getColorAtPixel(screenshotFile, *NEXT_RANK_UP_INDICATOR)
-    colorsAreMatching = areColorsMatching(colorAtPixel, NEXT_RANK_UP_COLOR, tolerance=30)
-    return colorsAreMatching
+    if pixelMatchesColor(screenshotFile, *NEXT_RANK_UP_INDICATOR, NEXT_RANK_UP_COLOR, tolerance=30):
+        rankUp = RankState.NEXT_RANK_UP
+    elif pixelMatchesColor(screenshotFile, *CURRENT_RANK_UP_INDICATOR, NEXT_RANK_UP_COLOR, tolerance=30):
+        rankUp = RankState.CURRENT_RANK_UP
+    elif pixelMatchesColor(screenshotFile, *PREV_RANK_UP_INDICATOR, NEXT_RANK_UP_COLOR, tolerance=30):
+        rankUp = RankState.PREV_RANK_UP
+    else:
+        rankUp = None
+    print(f'checkForRankUp: {rankUp}')
+    return rankUp
 
 atRankMenu = False
 def ensureRankMenuOpen():
@@ -31,25 +52,38 @@ def closeRankMenu():
         wait(WAIT_LONG)
         atRankMenu = False
 
-def upgradeRank():
+def upgradeRank() -> RankUp:
     ensureRankMenuOpen()
 
-    rankUp = False
-
-    # Some weird bug where the rank up indication doesn't show up unless you cycle through the rank ups
-    tapAt(*NEXT_RANK_UP)
-    wait(WAIT_MEDIUM)
-    tapAt(*PREV_RANK_UP)
-    wait(WAIT_LONG)
-
-    while checkForRankUp():
-        rankUp = True
+    rankUpIsSelected = False
+    bigUpgradeAttempted = False
+    while not rankUpIsSelected:
+        tapAt(*NEXT_RANK_UP)
         wait(WAIT_MEDIUM)
         tapAt(*NEXT_RANK_UP)
-        wait(WAIT_LONG)
+        wait(WAIT_MEDIUM)
+
+        state = checkForRankUp()
+        if state == RankState.PREV_RANK_UP:
+            tapAt(*PREV_RANK_UP)
+            wait(WAIT_MEDIUM)
+            rankUpIsSelected = True
+        elif state == RankState.CURRENT_RANK_UP:
+            rankUpIsSelected = True
+        elif state == RankState.NEXT_RANK_UP:
+            bigUpgradeAttempted = True
+            pass
+        elif state is None:
+            break
     
-    if rankUp:
+    if rankUpIsSelected:
         tapAt(*UPGRADE_RANK)
-        wait(WAIT_LONG)
+        wait(WAIT_MEDIUM)
 
     closeRankMenu()
+    if bigUpgradeAttempted:
+        return RankUp.BIG_RANK_UP
+    elif rankUpIsSelected:
+        return RankUp.SMALL_RANK_UP
+    else:
+        return RankUp.NO_RANK_UP

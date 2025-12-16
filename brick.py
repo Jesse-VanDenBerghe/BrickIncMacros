@@ -22,43 +22,51 @@ FIELD_TO_LAST_SELECTABLE = 200, 2580
 FIELD_SELECT_LAST_SELECTABLE = 700, 1850
 
 def autoFire():
-    rapidTap(*AUTOFIRE, 10, 1)
-    wait()
+    rapidTap(*AUTOFIRE, 20, 1)
+    wait(WAIT_MEDIUM)
 
 def upgradeWeapons():
     tapAt(*TO_WEAPON_MENU)
-    wait(WAIT_LONG)
+    wait()
     tapAt(*WEAPON_BUY_ALL)
-    wait()
+    wait(WAIT_SHORT)
     tapAt(*WEAPON_UPGRADE_ALL)
-    wait()
+    wait(WAIT_SHORT)
     tapAt(*WEAPON_EQUIP_ALL)
-    wait()
+    wait(WAIT_SHORT)
 
 def upgradeResearch():
     tapAt(*TO_RESEARCH_MENU)
-    wait(WAIT_LONG)
+    wait(WAIT_MEDIUM)
     tapAt(*RESEARCH_UPGRADE_ALL)
-    wait()
+    wait(WAIT_SHORT)
     tapAt(*RESEARCH_UP)
-    wait()
+    wait(WAIT_SHORT)
     tapAt(*RESEARCH_DOWN)
-    wait()
+    wait(WAIT_MEDIUM)
     tapAt(*RESEARCH_1)
     wait(WAIT_SHORT)
     tapAt(*RESEARCH_2)
-    wait()
+    wait(WAIT_SHORT)
     tapAt(*RESEARCH_3)
-    wait()
+    wait(WAIT_SHORT)
+
+    swipeUpAndHold(*RESEARCH_3, -550, 800, 200)
+
+    tapAt(*RESEARCH_2)
+    wait(WAIT_SHORT)
+    tapAt(*RESEARCH_3)
+    wait(WAIT_MEDIUM)
+
     tapAt(*RESEARCH_UPGRADE_ALL)
-    wait()
+    wait(WAIT_MEDIUM)
 
 def upgradeFields():
     tapAt(*TO_FIELDS_MENU)
     wait(WAIT_LONG)
     tapAt(*FIELDS_UNLOCK_ASSIST)
-    wait()
+    wait(WAIT_SHORT)
     tapAt(*FIELD_TO_LAST_SELECTABLE)
-    wait()
+    wait(WAIT_MEDIUM)
     tapAt(*FIELD_SELECT_LAST_SELECTABLE)
-    wait()
+    wait(WAIT_SHORT)
