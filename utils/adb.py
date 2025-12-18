@@ -39,6 +39,13 @@ def swipeFromTo(x1, y1, x2, y2, duration_ms):
     except Exception as error:
         print(f'Error performing swipe from ({x1}, {y1}) to ({x2}, {y2}): {error}')
 
+def swipeUp(x, y, distance, duration_ms):
+    try:
+        end_y = y - distance
+        subprocess.run(['adb', 'shell', 'input', 'swipe', str(x), str(y), str(x), str(end_y), str(duration_ms)], check=True)
+    except Exception as error:
+        print(f'Error performing swipe up at ({x}, {y}) for distance {distance}: {error}')
+
 def swipeUpAndHold(x, y, distance, swipe_duration_ms, hold_duration_ms):
     try:
         end_y = y - distance

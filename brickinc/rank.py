@@ -2,6 +2,7 @@ from utils.adb import *
 from utils.image import *
 from utils.ochestrator import *
 from enum import Enum
+from PIL import Image
 
 TO_RANK_MENU = 640, 420
 NEXT_RANK_UP_COLOR = (132,255,0)
@@ -24,16 +25,21 @@ class RankUp(Enum):
 
 def checkForRankUp() -> RankState | None:
     rankUp = None
+
     screenshotFile = 'images/artifacts/next_rank_up.png'
+
     createFullScreenShot(screenshotFile)
-    if pixelMatchesColor(screenshotFile, *NEXT_RANK_UP_INDICATOR, NEXT_RANK_UP_COLOR, tolerance=30):
+    img = Image.open(screenshotFile).convert('RGB')
+    
+    if areColorsMatching(getColorAtPixelFromImage(img, *NEXT_RANK_UP_INDICATOR), NEXT_RANK_UP_COLOR, tolerance=30):
         rankUp = RankState.NEXT_RANK_UP
-    elif pixelMatchesColor(screenshotFile, *CURRENT_RANK_UP_INDICATOR, NEXT_RANK_UP_COLOR, tolerance=30):
+    elif areColorsMatching(getColorAtPixelFromImage(img, *CURRENT_RANK_UP_INDICATOR), NEXT_RANK_UP_COLOR, tolerance=30):
         rankUp = RankState.CURRENT_RANK_UP
-    elif pixelMatchesColor(screenshotFile, *PREV_RANK_UP_INDICATOR, NEXT_RANK_UP_COLOR, tolerance=30):
+    elif areColorsMatching(getColorAtPixelFromImage(img, *PREV_RANK_UP_INDICATOR), NEXT_RANK_UP_COLOR, tolerance=30):
         rankUp = RankState.PREV_RANK_UP
     else:
         rankUp = None
+        
     print(f'checkForRankUp: {rankUp}')
     return rankUp
 

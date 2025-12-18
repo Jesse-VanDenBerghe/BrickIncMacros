@@ -1,5 +1,6 @@
 from utils.adb import *
 from brickinc.brick import *
 from brickinc.upgrades import *
+from brickinc.rank import *
 
-upgradeScience()
+createFullScreenShot("hard_dive_upgrades_button.png")

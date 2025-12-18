@@ -27,6 +27,13 @@ def getColorAtPixel(image_path, x, y):
     r, g, b = img.getpixel((x, y))
     return r, g, b
 
+def getColorAtPixelFromImage(img, x, y):
+    width, height = img.size
+    if x < 0 or x >= width or y < 0 or y >= height:
+        raise ValueError("Coordinates are out of image bounds.")
+    r, g, b = img.getpixel((x, y))
+    return r, g, b
+
 def areColorsMatching(color1, color2, tolerance=10):
     return all(abs(c1 - c2) <= tolerance for c1, c2 in zip(color1, color2))
 

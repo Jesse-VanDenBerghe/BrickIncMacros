@@ -25,6 +25,10 @@ def autoFire():
     rapidTap(*AUTOFIRE, 20, 1)
     wait(WAIT_MEDIUM)
 
+def autoFireAlot():
+    rapidTap(*AUTOFIRE, 30, 1)
+    wait(WAIT_MEDIUM)
+
 def upgradeWeapons():
     tapAt(*TO_WEAPON_MENU)
     wait()

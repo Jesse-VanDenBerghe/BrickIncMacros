@@ -58,7 +58,8 @@ def closeSoulMenu():
 
 def upgradeSouls():
     ensureSoulMenuOpen()
-
+    
+    wait(WAIT_MEDIUM)
     tapAt(*TO_SOUL_ALTAR)
     wait(WAIT_MEDIUM)
     tapAt(*UPGRADE_SOUL_ALTAR)
