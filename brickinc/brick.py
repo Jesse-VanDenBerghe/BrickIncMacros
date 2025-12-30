@@ -1,5 +1,6 @@
-from utils.adb import *
-from utils.ochestrator import *
+from utils.adb import tapAt, rapidTap, swipeUpAndHold
+from utils.ochestrator import wait, WAIT_LONG, WAIT_MEDIUM, WAIT_SHORT
+from utils.logger import log, logh1, logh2
 
 AUTOFIRE = 625, 2750
 
@@ -21,15 +22,21 @@ FIELDS_UNLOCK_ASSIST = 824, 1570
 FIELD_TO_LAST_SELECTABLE = 200, 2580
 FIELD_SELECT_LAST_SELECTABLE = 700, 1850
 
+
 def autoFire():
+    logh2("auto firing 20 times")
     rapidTap(*AUTOFIRE, 20, 1)
     wait(WAIT_MEDIUM)
 
+
 def autoFireAlot():
+    logh2("Auto firing 20 times")
     rapidTap(*AUTOFIRE, 30, 1)
     wait(WAIT_MEDIUM)
 
+
 def upgradeWeapons():
+    logh2("Weapons")
     tapAt(*TO_WEAPON_MENU)
     wait()
     tapAt(*WEAPON_BUY_ALL)
@@ -39,7 +46,9 @@ def upgradeWeapons():
     tapAt(*WEAPON_EQUIP_ALL)
     wait(WAIT_SHORT)
 
+
 def upgradeResearch():
+    logh2("Research")
     tapAt(*TO_RESEARCH_MENU)
     wait(WAIT_MEDIUM)
     tapAt(*RESEARCH_UPGRADE_ALL)
@@ -65,7 +74,9 @@ def upgradeResearch():
     tapAt(*RESEARCH_UPGRADE_ALL)
     wait(WAIT_MEDIUM)
 
+
 def upgradeFields():
+    logh2("Fields")
     tapAt(*TO_FIELDS_MENU)
     wait(WAIT_LONG)
     tapAt(*FIELDS_UNLOCK_ASSIST)

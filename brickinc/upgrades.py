@@ -1,28 +1,37 @@
-from utils.adb import *
-from utils.ochestrator import *
+from utils.logger import log, logh2, logh1
+from utils.adb import tapAt, rapidTap
+from utils.ochestrator import wait, WAIT_LONG, WAIT_MEDIUM, WAIT_SHORT
 
 TOGGLE_UPGRADES = 360, 2770
 
+
 atUpgrades = False
+
+
 def toggleUpgrades():
     global atUpgrades
     tapAt(*TOGGLE_UPGRADES)
     wait(.2)
     atUpgrades = not atUpgrades
 
+
 def ensureUpgradesOpen():
+    log(1, "Ensuring upgrades are open")
     global atUpgrades
     if not atUpgrades:
         toggleUpgrades()
 
+
 def ensureUpgradesClosed():
+    log(1, "Ensuring upgrades are closed")
     global atUpgrades
     if atUpgrades:
         toggleUpgrades()
 
+
 def upgradeAllUpgrades():
+    logh1("Upgrades")
     ensureUpgradesOpen()
-    
     upgradeSouls()
     upgradeScience()
     upgradeDimensions()
@@ -57,6 +66,7 @@ def closeSoulMenu():
         atSoulMenu = False
 
 def upgradeSouls():
+    logh2("Souls")
     ensureSoulMenuOpen()
     
     wait(WAIT_MEDIUM)
@@ -103,6 +113,7 @@ def closeScienceMenu():
         atScienceMenu = False
 
 def upgradeScience():
+    logh2("Science")
     ensureScienceMenuOpen()
 
     rapidTap(*UPGRADE_SCIENCE_25, 3, 3)
@@ -134,6 +145,7 @@ def closeDimensionMenu():
         atDimensionMenu = False
 
 def upgradeDimensions():
+    logh2("Dimension")
     ensureDimensionMenuOpen()
 
     rapidTap(*UPGRADE_DIMENSIONS_25, 3, 3)
