@@ -1,6 +1,4 @@
-from utils.adb import *
-from brickinc.brick import *
-from brickinc.upgrades import *
-from brickinc.rank import *
+from utils.adb import createFullScreenShot
+from brickinc.path_of_truth import path_of_truth 
 
-createFullScreenShot("hard_dive_upgrades_button.png")
+path_of_truth(1)

@@ -116,11 +116,11 @@ def upgradeScience():
     logh2("Science")
     ensureScienceMenuOpen()
 
-    rapidTap(*UPGRADE_SCIENCE_25, 3, 3)
-    wait(WAIT_SHORT)
-    tapAt(*UPGRADE_SCIENCE_100)
+    tapAt(*UPGRADE_SCIENCE_25)
     wait(WAIT_SHORT)
     tapAt(*UPGRADE_SCIENCE_ALL)
+    wait(WAIT_SHORT)
+    tapAt(*UPGRADE_SCIENCE_100)
 
     closeScienceMenu()
 
