@@ -268,4 +268,4 @@ def path_of_truth(times: int):
         tapAt(*CONFIRM_AFTER_RUN_COORD)
 
 
-path_of_truth(1)
+path_of_truth(3)

@@ -12,6 +12,7 @@ class Abilities(Enum):
     GREEDY_HAND = (4, 3, 213, 1214)
     ADRENALIN_BOOSRTER = (5, 3, 712, 1189)
     ELECTRIC_BRAIN = (6, 3, 959, 1194)
+    PURE_POWER = (7, 4 , 467, 1600)
 
     def __init__(self, code, cost, x, y):
         self.code = code
@@ -20,6 +21,7 @@ class Abilities(Enum):
         self.y = y
 
 abilityBuyStack = Stack([
+    Abilities.PURE_POWER,
     Abilities.DEEP_DIVE,
     Abilities.ADRENALIN_BOOSRTER,
     Abilities.ELECTRIC_BRAIN,
